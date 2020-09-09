@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+    #main{
+        text-align : center;
+        width : 800px; 
+        margin: 0 auto;
+    }
+    h1{
+        margin:60px;
+        font-size:60px;
+    }
+    button{
+        width:200px;
+        height:200px;
+        margin : 50px;
+    }
+    #strg{
+        background-color:gray !important;
+        border : gray !important;
+    }
+    #strg:hover{
+        background-color:darkslategray !important;
+    }
+</style>
+<div id="main">
+    <h1>My page</h1>
+    <div class="container my-3">
+        <div>
+            <button type = "button" class="btn btn-primary" onclick="location.href='{% url 'common:update' %}'"> Account </button>
+            <button id="strg" type = "button" class="btn btn-primary" onclick="location.href='{% url 'sunyong:mystorage' %}'"> MyStorage </button>
+        </div>
+    </div>
+</div>
+{% endblock %}

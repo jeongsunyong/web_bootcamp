@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container my-3">
+    <div class="row my-3">
+        <div class="col-4">
+            <h4>sign up</h4>
+        </div>
+        <div class="col-8 text-right">
+            <span> or <a href = "{% url 'common:login' %}">sign in</a></span>
+        </div>
+    </div>
+    <form method="post" class="post-form">
+        {% csrf_token %}
+        {% include "common/form_errors.html" %}
+        <div class="form-group">
+            <label for="username">사용자 이름</label>
+            <input type="text" class="form-control" name="username" id="username"
+                value="ex) 아무개">
+        </div>
+        <div class="form-group">
+            <label for="password1">비밀번호</label>
+            <input type="pasword" class="form-control" name="password1" id="password1"
+                value="ex) 1234">
+        </div>
+        <div class="form-group">
+            <label for="password2">비밀번호 확인</label>
+            <input type="pasword" class="form-control" name="password2" id="password2"
+                value="ex) 12345678">
+        </div>
+        <div class="form-group">
+            <label for="email">이메일</label>
+            <input type="text" class="form-control" name="email" id="email"
+                value="ex) id@naver.com">
+        </div>
+        <div class="form-group">
+            <label for="phone">연락처</label>
+            <input type="text" class="form-control" name="phone" id="phone"
+                value="ex) 010-0000-0000">
+        </div>
+        <div class="form-group">
+            <label for="intro">자기소개</label>
+            <input type="textarea" class="form-control" name="intro" id="intro"
+                value="안녕하세요">
+        </div>
+        <button type="submit" class="btn btn-primary">register</button>
+    </form>
+</div>
+{% endblock %}

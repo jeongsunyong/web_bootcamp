@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    #main{
+        text-align : center;
+        width : 800px; 
+        margin: 0 auto;
+    }
+    h1{
+        margin:100px;
+    }
+    button{
+        width:300px;
+        height:100px;
+    }
+</style>
+<div id="main">
+    <h1>Sunyong World. com</h1>
+    <button type = "button" class="btn btn-primary" onclick="location.href='{% url 'common:login' %}'"> SOMETHING </button>
+</div>
+{% endblock %}
