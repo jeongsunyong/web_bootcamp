@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    #main{
+        text-align : center;
+        width : 800px; 
+        margin: 0 auto;
+    }
+    h1{
+        margin:40px;
+    }
+
+</style>
+    <div id="main">
+
+    <h1>Video Uploader</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        {% if user.is_authenticated %}
+            <input type="hidden" name="username" value ="{{user.username}}" />
+        {% else %}
+            <input type="hidden" name= "username" value = "undefined" />
+        {% endif %}
+        <button type="submit">Upload</button>
+      </form>
+
+</div>
+
+
+
+{% endblock %}
+

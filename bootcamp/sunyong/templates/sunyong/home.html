@@ -17,6 +17,10 @@
 </style>
 <div id="main">
     <h1>Sunyong World. com</h1>
-    <button type = "button" class="btn btn-primary" onclick="location.href='{% url 'common:login' %}'"> SOMETHING </button>
+    {% if user.is_authenticated %}
+    <button type = "button" class="btn btn-primary" onclick="location.href='{% url 'sunyong:upload_video' %}'"> 파일을 입력하세요 </button>
+    {% else %}
+    <button type = "button" class="btn btn-primary" onclick="location.href='{% url 'common:login' %}'"> 로그인 하세요 </button>
+    {% endif %}
 </div>
 {% endblock %}
