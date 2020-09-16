@@ -34,7 +34,6 @@ def readvid(videoURL, frames, title):
     path_root=path_root.replace('\\','/')
     new_dir_path=path_root+videoURL
     new_dir_path=os.path.splitext(new_dir_path)[0]
-    print(new_dir_path)
 
     cap=cv2.VideoCapture(path_root+videoURL)
 
@@ -54,6 +53,7 @@ def readvid(videoURL, frames, title):
 
     cut_nums=len(frames)
     idx=0
+    cnt=0
     frame_num=0
     while (cap.isOpened()):
         ret, frame= cap.read()
@@ -61,12 +61,15 @@ def readvid(videoURL, frames, title):
             frame_num=frame_num+1
             if frames[idx][1].get_frames() == frame_num:
                 idx=idx+1
+                if frames[idx][1].get_seconds()-frames[idx][0].get_seconds() < 1:
+                    continue
                 if idx>=cut_nums:
                     idx=idx-1
                     break
                 if not os.path.isdir(new_dir_path):
                     os.mkdir(new_dir_path)
-                cv2.imwrite(new_dir_path + '/' + title + '_' + str(idx) +'.jpg',frame)
+                cv2.imwrite(new_dir_path + '/' + title + '_' + str(cnt) +'.jpg',frame)
+                cnt=cnt+1
                 cv2.waitKey(1)
 
         else :

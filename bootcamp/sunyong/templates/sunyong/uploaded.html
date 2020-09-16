@@ -1,1 +1,9 @@
-<h2> the image has been uploaded</h2>
+{% extends "base.html" %}
+
+{% block content %}
+<h2> snap page</h2>
+{% for snap in snaps %}
+    <img src = {{snap}} alt="snap image" />
+    <li> snapshot </li>
+{% endfor %}
+{% endblock %}

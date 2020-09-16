@@ -1,6 +1,6 @@
-<html> 
-    <head><title>Upload Test</title></head> 
-    <body> 
+{% extends "base.html" %}
+
+{% block content %}
         <form action="/upload/"
               method="post"
               enctype="multipart/form-data"> 
@@ -10,5 +10,4 @@
                    id="id_file" />
             <input type="submit" value="UPLOAD" /> 
         </form> 
-    </body> 
-</html> 
+{% endblock %}

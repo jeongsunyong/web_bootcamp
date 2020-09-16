@@ -2,14 +2,18 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
+
 from .forms import UploadFileForm
 from .models import FileUpload
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 
-#from django.conf import settings
+
+from django.conf import settings
 from . import modules
+import glob
 import os
+
 
 
 def index(request):
@@ -21,9 +25,9 @@ def video_list(request):
 def process_vid(videoURL, title):
     #modules.readvid(videoURL)
     frames = modules.find_scenes(videoURL)
-    #print(result[1][0].get_frames())
     modules.readvid(videoURL,frames,title)
     return
+
 
 @login_required
 def upload_video(request):
@@ -44,7 +48,20 @@ def upload_video(request):
         process_vid(videoURL, vid_title)
         #
 
-        return redirect('sunyong:video_list')
+
+        path_root=settings.MEDIA_ROOT
+        path_root=path_root.replace('\\','/')
+        videoURL=dir_path=os.path.splitext(videoURL)[0]
+        tmp=glob.glob(path_root+videoURL+"/*.jpg")
+        tmp=[pth.replace("\\","/") for pth in tmp]
+        snapname= [pth.split('/')[-1] for pth in tmp]
+        print(snapname)
+        snaps=[settings.MEDIA_URL + videoURL + "/" + f for f in snapname]
+        snapname= [pth.split('.')[0] for pth in snapname]
+        context={
+            'snaps':snaps,
+        }
+        return render(request, 'sunyong/uploaded.html', context)
     else:
         form=UploadFileForm()
     return render(request, 'sunyong/videopage.html',{'form':form})
